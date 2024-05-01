@@ -16,6 +16,7 @@ public interface FoodService {
 	public List<Food> getRestaurantsFood(Long restaurantId,
 										 boolean isVegetarian,
 										 boolean isSeasonal,
+										 boolean isNonveg, 
 										 String foodCategory
 	);
 	

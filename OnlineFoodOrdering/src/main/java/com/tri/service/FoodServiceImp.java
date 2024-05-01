@@ -1,5 +1,6 @@
 package com.tri.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,6 +32,7 @@ public class FoodServiceImp implements FoodService{
 		food.setIngredients(req.getIngredients());
 		food.setSeasonal(req.isSeasional());
 		food.setVegetarian(req.isVegetarian());
+		food.setCreationDate(LocalDateTime.now());
 		
 		Food savedFood = foodRepository.save(food);
 		restaurant.getFoods().add(savedFood);
@@ -49,11 +51,15 @@ public class FoodServiceImp implements FoodService{
 	@Override
 	public List<Food> getRestaurantsFood(Long restaurantId,
 										 boolean isVegetarian,
+										 boolean isNonveg,
 										 boolean isSeasonal, String foodCategory) {
 		List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
 		
 		if (isVegetarian) {
 			foods = filterByVegetarian(foods, isVegetarian);
+		}
+		if (isNonveg) {
+			foods = filterByNonveg(foods, isNonveg);
 		}
 		if (isSeasonal) {
 			foods = filterBySeasonal(foods, isSeasonal);
@@ -75,6 +81,10 @@ public class FoodServiceImp implements FoodService{
 
 	private List<Food> filterBySeasonal(List<Food> foods, boolean isSeasonal) {
 		return foods.stream().filter(food -> food.isSeasonal() == isSeasonal).collect(Collectors.toList());
+	}
+
+	private List<Food> filterByNonveg(List<Food> foods, boolean isNonveg) {
+		return foods.stream().filter(food -> food.isVegetarian() == false).collect(Collectors.toList());
 	}
 
 	private List<Food> filterByVegetarian(List<Food> foods, boolean isVegetarian) {

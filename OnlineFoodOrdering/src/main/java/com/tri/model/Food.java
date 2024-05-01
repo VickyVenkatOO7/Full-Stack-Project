@@ -1,6 +1,6 @@
 package com.tri.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,5 +50,5 @@ public class Food {
 	@ManyToMany
 	private List<IngredientsItem> ingredients = new ArrayList<>();
 	
-	private Date creationDate; 
+	private LocalDateTime creationDate; 
 }
