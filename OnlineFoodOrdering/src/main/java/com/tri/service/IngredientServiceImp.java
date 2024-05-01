@@ -1,5 +1,6 @@
 package com.tri.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class IngredientServiceImp implements IngredientsService{
 		IngredientCategory category = new IngredientCategory();
 		category.setRestaurant(restaurant);
 		category.setName(name);
-		
+		category.setIngredients(new ArrayList<>());
 		return ingredientCategoryRepository.save(category);
 	}
 

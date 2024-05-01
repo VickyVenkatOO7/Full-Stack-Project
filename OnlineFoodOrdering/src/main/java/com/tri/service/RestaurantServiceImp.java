@@ -98,13 +98,13 @@ public class RestaurantServiceImp implements RestaurantService{
 	public Restaurant getRestaurantByUserId(Long userId) throws Exception {
 		Restaurant restaurant = restaurantRepository.findByOwnerId(userId);
 		if (restaurant == null) {
-			throw new Exception("Restaurant not found with owner id"+ userId);
+			throw new Exception("Restaurant not found with owner id "+ userId);
 		}
 		return restaurant;
 	}
 
 	@Override
-	public RestaurantDto addToFavourites(Long restaurantId, User user) throws Exception {
+	public RestaurantDto addToFavorites(Long restaurantId, User user) throws Exception {
 
 		Restaurant restaurant = findRestaurantById(restaurantId);
 		
@@ -114,19 +114,19 @@ public class RestaurantServiceImp implements RestaurantService{
 		dto.setTitle(restaurant.getName());
 		dto.setId(restaurantId);
 		
-		boolean isFavourited = false;
-		List<RestaurantDto> favourites = user.getFavourites();
-		for (RestaurantDto favourite : favourites) {
-			if (favourite.getId().equals(restaurantId)) {
-				isFavourited = true;
+		boolean isFavorited = false;
+		List<RestaurantDto> favorites = user.getFavorites();
+		for (RestaurantDto favorite : favorites) {
+			if (favorite.getId().equals(restaurantId)) {
+				isFavorited = true;
 				break;
 			}
 		}
 		
-		if (isFavourited) {
-			favourites.removeIf(favourite -> favourite.getId().equals(restaurantId));
+		if (isFavorited) {
+			favorites.removeIf(favourite -> favourite.getId().equals(restaurantId));
 		}else {
-			favourites.add(dto);
+			favorites.add(dto);
 		}
 		
 		userRepository.save(user);

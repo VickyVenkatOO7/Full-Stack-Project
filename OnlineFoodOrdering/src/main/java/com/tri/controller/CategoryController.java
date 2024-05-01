@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -40,12 +41,13 @@ public class CategoryController {
 	
 	
 	
-	@GetMapping("/category/restaurant")
+	@GetMapping("/category/restaurant/{id}")
 	public ResponseEntity<List<Category>> getRestaurantCategory(
+												   @PathVariable Long id,
 												   @RequestHeader("Authorization") String jwt) throws Exception {
 		User user = userService.findUserByJwtToken(jwt);
 		
-		List<Category> categories = categoryService.findCategoryByRestaurantId(user.getId());
+		List<Category> categories = categoryService.findCategoryByRestaurantId(id);
 		
 		return new ResponseEntity<>(categories, HttpStatus.CREATED);
 	}
