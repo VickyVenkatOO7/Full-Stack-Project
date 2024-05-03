@@ -1,6 +1,7 @@
 package com.tri.model;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +39,7 @@ public class Order {
 	
 	private String orderStatus;
 	
-	private Date createdAt;
+	private Timestamp createdAt;
 	
 	@ManyToOne
 	private Address deliveryAddress;

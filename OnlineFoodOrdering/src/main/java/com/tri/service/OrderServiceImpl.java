@@ -60,7 +60,7 @@ public class OrderServiceImpl implements OrderService{
 		
 		Order createdOrder = new Order();
 		createdOrder.setCustomer(user);
-		createdOrder.setCreatedAt((java.sql.Date) new Date());
+		createdOrder.setCreatedAt(new java.sql.Timestamp(new Date().getTime()));
 		createdOrder.setOrderStatus("Pending");
 		createdOrder.setDeliveryAddress(savedAddress);
 		createdOrder.setRestaurant(restaurant);
