@@ -57,6 +57,7 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	public CartItem updateCartItemQuantity(Long cartItemId, int quantity) throws Exception {
+		System.out.println("Updating cart item with ID: " + cartItemId);
 		Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartItemId);
 		if (cartItemOptional.isEmpty()) {
 			throw new Exception("Cart item not found.");
