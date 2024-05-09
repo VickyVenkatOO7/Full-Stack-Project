@@ -82,7 +82,7 @@ Optional<IngredientCategory> opt = ingredientCategoryRepository.findById(id);
 			throw new Exception("Ingredient not found.");
 		}
 		IngredientsItem ingredientsItem = optionalIngredientsItem.get();
-		ingredientsItem.setInStoke(ingredientsItem.isInStoke());
+		ingredientsItem.setInStoke(!ingredientsItem.isInStoke());
 		return ingredientItemRepository.save(ingredientsItem);
 	}
 }
